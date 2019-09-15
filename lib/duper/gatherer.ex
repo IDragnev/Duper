@@ -10,7 +10,7 @@ defmodule Duper.Gatherer do
   end
 
   def worker_done do
-    GenServer.cast @me, :woker_done
+    GenServer.cast @me, :worker_done
   end
 
   def add_result(path, hash) do
@@ -37,7 +37,7 @@ defmodule Duper.Gatherer do
     {:noreply, worker_count - 1}
   end
   def handle_cast({:add_result, path, hash}, worker_count) do
-    Duper.Results.add_hash_for path, hash
+    Duper.Results.add_hash_for {path, hash}
     {:noreply, worker_count}
   end
 
